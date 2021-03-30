@@ -514,7 +514,6 @@ export default class TargetService {
       };
     }
   };
-
   OnCreateAboutus = async about => {
     try {
       const dbc = await mongoConnect();

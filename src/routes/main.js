@@ -9,12 +9,12 @@ const router = express.Router();
 const user = new TargetUser();
 const targetService = new TargetService();
 
-// router.get("/", (req, res) => {
-//   res.json({
-//     success: true,
-//     message: "Welcome to Target100 API System."
-//   });
-// });
+router.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Welcome to Target100 API System."
+  });
+});
 
 router.post("/login", async (req, res) => {
   try {
@@ -438,7 +438,6 @@ router.delete("/delete-notification", isValidateToken(), async (req, res) => {
     });
   }
 });
-
 router.put("/create-aboutus", isValidateToken(), async (req, res) => {
   try {
     let { aboutUs } = req.body;

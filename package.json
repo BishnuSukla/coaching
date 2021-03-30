@@ -8,7 +8,7 @@
     "watch": "cross-env NODE_PATH=./src nodemon src/app.js --exec babel-node --presets=@babel/preset-env",
     "build": "cross-env babel ./src -d ./build"
   },
-  "author": "Bishnu Sukla",
+  "author": "Uraj Gogoi",
   "license": "ISC",
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.3.0",

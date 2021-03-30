@@ -19,9 +19,8 @@ if (!PORT) {
 }
 
 app.use(cors());
-app.use(express.static('public'))
 app.use(bodyParser({ limit: "50mb" }));
-app.use("/", Routes);
+app.use("/api", Routes);
 
 //HTTP server created.
 const httpServer = http.createServer(app);
@@ -33,5 +32,5 @@ httpServer.listen(PORT, err => {
 });
 
 app.get("/test", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/courses/images/test.jpg"));
+  res.sendFile(path.join(__dirname, "../public/test.jpg"));
 });
