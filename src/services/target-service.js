@@ -514,4 +514,93 @@ export default class TargetService {
       };
     }
   };
+
+  OnCreateAboutus = async about => {
+    try {
+      const dbc = await mongoConnect();
+      about.aboutId = Math.random()
+        .toString(36)
+        .substring(7);
+      about.createdAt = new Date();
+      let { result } = await dbc.collection("aboutus").insertOne(about);
+      if (result.ok != 1) {
+        throw "Error in creating about us";
+      }
+      return {
+        status: true,
+        message: "About us has created successfully"
+      };
+    } catch (ex) {
+      console.log(ex);
+      console.error("Error in creating about us");
+      return {
+        status: false,
+        error: ex
+      };
+    }
+  };
+
+  OnGetAboutus = async () => {
+    try {
+      const dbc = await mongoConnect();
+      let aboutUs = await dbc
+        .collection("aboutus").find({})
+        .sort({ _id: -1 })
+        .toArray();
+      return {
+        status: true,
+        message: aboutUs
+      };
+    } catch (ex) {
+      console.error("Error in fetching about us");
+      return {
+        status: false,
+        error: ex
+      };
+    }
+  };
+
+  OnUpdateAboutus = async about => {
+    try {
+      const dbc = await mongoConnect();
+      let findAboutus = await dbc
+        .collection("aboutus")
+        .findOne({ aboutId: about.aboutId });
+      if (!findAboutus) {
+        throw "About us not found!!";
+      }
+      let { result } = await dbc.collection("aboutus").updateOne(
+        { aboutId: about.aboutId },
+        {
+          $set: {
+            title:
+              "title" in about
+                ? about.title
+                : findAboutus.title,
+            description:
+                "description" in about
+                  ? about.description
+                  : findAboutus.description,
+            contact:
+                "contact" in about
+                  ? about.contact
+                  : findAboutus.contact
+          }
+        }
+      );
+      if (result.ok != 1) {
+        throw "Error while updating about us details.";
+      }
+      return {
+        status: true,
+        message: "About us has been updated successfully."
+      };
+    } catch (ex) {
+      console.error("Error in updating about us.");
+      return {
+        status: false,
+        error: ex
+      };
+    }
+  };
 }

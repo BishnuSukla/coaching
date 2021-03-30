@@ -439,4 +439,70 @@ router.delete("/delete-notification", isValidateToken(), async (req, res) => {
   }
 });
 
+router.put("/create-aboutus", isValidateToken(), async (req, res) => {
+  try {
+    let { aboutUs } = req.body;
+    let createAboutUs = await targetService.OnCreateAboutus(
+      aboutUs
+    );
+    if (!createAboutUs.status) {
+      throw createAboutUs.error;
+    }
+    res.status(200).json({
+      success: true,
+      message: "About us has been created successfully",
+      data: createAboutUs.message
+    });
+  } catch (ex) {
+    res.status(400).json({
+      success: false,
+      message: "Error in creating ABout us!!",
+      error: ex
+    });
+  }
+});
+
+router.get("/get-aboutus", async (req, res) => {
+  try {
+    let fetchAboutus = await targetService.OnGetAboutus();
+    if (!fetchAboutus.status) {
+      throw fetchAboutus.error;
+    }
+    res.status(200).json({
+      success: true,
+      message: "List of about us found !!",
+      data: fetchAboutus.message
+    });
+  } catch (ex) {
+    res.status(400).json({
+      success: false,
+      message: "Error in fetching about us !!",
+      error: ex
+    });
+  }
+});
+
+router.patch("/update-aboutus", isValidateToken(), async (req, res) => {
+  try {
+    let { aboutus } = req.body;
+    let updateAboutus = await targetService.OnUpdateAboutus(
+      aboutus
+    );
+    if (!updateAboutus.status) {
+      throw updateAboutus.error;
+    }
+    res.status(200).json({
+      success: true,
+      message: "About us has been updated successfully!!",
+      data: updateAboutus.message
+    });
+  } catch (ex) {
+    res.status(400).json({
+      success: false,
+      message: "Error in updating about us",
+      error: ex
+    });
+  }
+});
+
 export default router;
