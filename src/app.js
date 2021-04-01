@@ -21,7 +21,6 @@ if (!PORT) {
 app.use(cors());
 app.use(bodyParser({ limit: "50mb" }));
 app.use("/api", Routes);
-
 //HTTP server created.
 const httpServer = http.createServer(app);
 

@@ -74,14 +74,14 @@ export default class TargetService {
         }
       );
       if (result.ok != 1) {
-        throw "Error while updating course details.";
+        throw "Error while updating notification details.";
       }
       return {
         status: true,
-        message: "course has been updated successfully."
+        message: "notification has been updated successfully."
       };
     } catch (ex) {
-      console.error("Error in updating course.");
+      console.error("Error in updating notification.");
       return {
         status: false,
         error: ex
@@ -215,11 +215,8 @@ export default class TargetService {
       if (!findFaculty) {
         throw "Faculty not found!!";
       }
-      let { result } = await dbc.collection("faculties").updateOne(
-        { facultyId: facultyId },
-        {
-          $set: { isDeleted: true }
-        }
+      let { result } = await dbc.collection("faculties").deleteOne(
+        { facultyId: facultyId }
       );
       if (result.ok !== 1) {
         throw "Error in deleting faculty.";
@@ -449,11 +446,8 @@ export default class TargetService {
       if (!findCourse) {
         throw "Course not found!!";
       }
-      let { result } = await dbc.collection("courses").updateOne(
-        { courseId: courseId },
-        {
-          $set: { isDeleted: true }
-        }
+      let { result } = await dbc.collection("courses").deleteOne(
+        { courseId: courseId }
       );
       if (result.ok != 1) {
         throw "Error in updating course!!";
@@ -493,11 +487,8 @@ export default class TargetService {
       if (!findNotification) {
         throw "notificationId not found!!";
       }
-      let { result } = await dbc.collection("notifications").updateOne(
-        { notificationId: notificationId },
-        {
-          $set: { isDeleted: true }
-        }
+      let { result } = await dbc.collection("notifications").deleteOne(
+        { notificationId: notificationId }
       );
       if (result.ok != 1) {
         throw "Error in deleting notification!!";

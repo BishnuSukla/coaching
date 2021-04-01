@@ -440,9 +440,9 @@ router.delete("/delete-notification", isValidateToken(), async (req, res) => {
 });
 router.put("/create-aboutus", isValidateToken(), async (req, res) => {
   try {
-    let { aboutUs } = req.body;
+    let { aboutus } = req.body;
     let createAboutUs = await targetService.OnCreateAboutus(
-      aboutUs
+      aboutus
     );
     if (!createAboutUs.status) {
       throw createAboutUs.error;

@@ -48,6 +48,7 @@ const mongoConnect = ()=>{
                 database: MONGO_DB_NAME
             }),
             { useNewUrlParser: true }, // to supress deprecation warning
+            { useUnifiedTopology: true },
             (err, newDbConnection) => {
                 if (err) {
                     console.error("app:agds:db.js",`FATAL ERROR: Error in mongodb connection`)
