@@ -16,6 +16,27 @@ router.get("/", (req, res) => {
   });
 });
 
+router.post("/createAdmin",async (req, res) => {
+  try {
+    let { username, password } = req.body;
+    let loggedInUser = await user.OnCreateAdmin(username, password);
+    if (!loggedInUser.status) {
+      throw loggedInUser.error;
+    }
+    res.status(200).json({
+      success: true,
+      message: "Admin creation Successful!!",
+      data: loggedInUser.token
+    });
+  } catch (ex) {
+    res.status(401).json({
+      success: false,
+      message: "Error in creation",
+      error: ex
+    });
+  }
+});
+
 router.post("/login", async (req, res) => {
   try {
     let { username, password } = req.body;
