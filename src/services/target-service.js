@@ -387,39 +387,30 @@ export default class TargetService {
         { courseId: course.courseId },
         {
           $set: {
-            courseName:
-              "courseName" in course
-                ? course.courseName
-                : findCourse.courseName,
-
-            courseFaculties:
-              "courseFaculties" in course
-                ? course.courseFaculties
-                : findCourse.courseFaculties,
-            coursePrice:
-              "coursePrice" in course
-                ? course.coursePrice
-                : findCourse.coursePrice,
-            coursePriceHomeCoaching:
-              "coursePriceHomeCoaching" in course
-                ? course.coursePriceHomeCoaching
-                : findCourse.coursePriceHomeCoaching,
-            courseCategory:
-              "courseCategory" in course
-                ? course.courseCategory
-                : findCourse.courseCategory,
-            courseDescription:
-              "courseDescription" in course
-                ? course.courseDescription
-                : findCourse.courseDescription,
-            courseStartingClass:
-              "courseStartingClass" in course
-                ? course.courseStartingClass
-                : findCourse.courseStartingClass,
-            courseEndingClass:
-              "courseEndingClass" in course
-                ? course.courseEndingClass
-                : findCourse.courseEndingClass
+            name:
+              "name" in course
+                ? course.name
+                : findCourse.name,
+            faculty:
+              "faculty" in course
+                ? course.faculty
+                : findCourse.faculty,
+            typeOfTution:
+              "typeOfTution" in course
+                ? course.typeOfTution
+                : findCourse.typeOfTution,
+            topicCovered:
+              "topicCovered" in course
+                ? course.topicCovered
+                : findCourse.topicCovered,
+            category:
+              "category" in course
+                ? course.category
+                : findCourse.category,
+            class:
+                "class" in course
+                  ? course.class
+                  : findCourse.class,
           }
         }
       );

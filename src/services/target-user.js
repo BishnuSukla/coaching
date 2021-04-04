@@ -2,6 +2,27 @@ import { mongoConnect } from "../util/db";
 import { generateToken } from "../util/token";
 
 export default class TargetUser {
+  
+  OnCreateAdmin = async(username,password)=>{
+    try {
+      const dbc = await mongoConnect();
+      let admin = {username:username, password:password}
+      let { result } = await dbc.collection("admin").insertOne(admin);
+      if (result.ok !== 1) {
+        throw "Error in creating new admin";
+      }
+      return {
+        status: true,
+        message: "Admin has been created successfully"
+      };
+    } catch (ex) {
+      console.error("Error in creating admin");
+      return {
+        status: false,
+        error: ex
+      };
+    }
+  }
   OnLoginUser = async (username, password) => {
     try {
       let user = await this.OnExistsUser(username);
