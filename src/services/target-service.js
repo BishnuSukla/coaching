@@ -158,12 +158,10 @@ export default class TargetService {
               "subjects" in faculty
                 ? faculty.subjects
                 : findFaculty.subjects,
-
-            image: "image" in faculty ? faculty.image : findFaculty.image,
-            description:
-              "description" in faculty
-                ? faculty.description
-                : findFaculty.description,
+            // description:
+            //   "description" in faculty
+            //     ? faculty.description
+            //     : findFaculty.description,
 
             email:
               "facultyEmail" in faculty
@@ -173,20 +171,20 @@ export default class TargetService {
             mobile:
               "mobile" in faculty
                 ? faculty.mobile
-                : findFaculty.mobile,
+                : findFaculty.mobile
 
-            qualification:
-              "qualification" in faculty
-                ? faculty.qualification
-                : findFaculty.qualification,
-            institute:
-              "institute" in faculty
-                ? faculty.institute
-                : findFaculty.institute,
-            gender:
-              "gender" in faculty
-                ? faculty.gender
-                : findFaculty.gender
+            // qualification:
+            //   "qualification" in faculty
+            //     ? faculty.qualification
+            //     : findFaculty.qualification
+            // institute:
+            //   "institute" in faculty
+            //     ? faculty.institute
+            //     : findFaculty.institute
+            // gender:
+            //   "gender" in faculty
+            //     ? faculty.gender
+            //     : findFaculty.gender
           }
         }
       );
