@@ -260,18 +260,19 @@ export default class TargetService {
       };
     }
   };
-  OnGetRegisteredStudents = async registrationQueryFields => {
+  OnGetRegisteredStudents = async () => {
     //console.log("registrationQueryFields", typeof registrationQueryFields);
     try {
-      registrationQueryFields = JSON.parse(registrationQueryFields);
+      //registrationQueryFields = JSON.parse(registrationQueryFields);
       const dbc = await mongoConnect();
       let registeredStudentList = await dbc
         .collection("registrations")
-        .find({
-          status: registrationQueryFields.status,
-          type: registrationQueryFields.type
-        })
-        .sort({ createdAt: -1 })
+        //.find({ isDeleted: false })
+        // .find({
+        //   status: registrationQueryFields.status,
+        //   type: registrationQueryFields.type
+        // })
+        //.sort({ createdAt: -1 })
         .toArray();
       return {
         status: true,
@@ -326,7 +327,31 @@ export default class TargetService {
       };
     }
   };
-
+  // OnRegister = async course => {
+  //   try {
+  //     const dbc = await mongoConnect();
+  //     course.courseId = Math.random()
+  //       .toString(36)
+  //       .substring(7);
+  //     course.isDeleted = false;
+  //     course.createdAt = new Date();
+  //     let { result } = await dbc.collection("student").insertOne(course);
+  //     if (result.ok != 1) {
+  //       throw "Error in Student Register";
+  //     }
+  //     return {
+  //       status: true,
+  //       message: "Student Registed successfully"
+  //     };
+  //   } catch (ex) {
+  //     console.log(ex);
+  //     console.error("Error in Student Register");
+  //     return {
+  //       status: false,
+  //       error: ex
+  //     };
+  //   }
+  // };
   OnCreateCourse = async course => {
     try {
       const dbc = await mongoConnect();

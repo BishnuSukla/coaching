@@ -141,7 +141,7 @@ router.delete("/delete-faculty", isValidateToken(), async (req, res) => {
   }
 });
 
-router.post("/registration", isValidateToken(), async (req, res) => {
+router.post("/registration", async (req, res) => {
   try {
     let { register } = req.body;
     let registerStudent = await targetService.OnRegister(register);
@@ -165,11 +165,9 @@ router.post("/registration", isValidateToken(), async (req, res) => {
 router.get("/get-registrations", isValidateToken(), async (req, res) => {
   // console.log(req)
   try {
-    let { registrationQueryFields } = req.query;
+   // let { registrationQueryFields } = req.query;
 
-    let fetchStudents = await targetService.OnGetRegisteredStudents(
-      registrationQueryFields
-    );
+    let fetchStudents = await targetService.OnGetRegisteredStudents();
     if (!fetchStudents.status) {
       throw fetchStudents.error;
     }
