@@ -146,47 +146,45 @@ export default class TargetService {
         { facultyId: faculty.facultyId },
         {
           $set: {
-            facultyName:
-              "facultyName" in faculty
-                ? faculty.facultyName
-                : findFaculty.facultyName,
-            facultyExperience:
-              "facultyExperience" in faculty
-                ? faculty.facultyExperience
-                : findFaculty.facultyExperience,
-            facultySubjects:
-              "facultySubjects" in faculty
-                ? faculty.facultySubjects
-                : findFaculty.facultySubjects,
+            name:
+              "name" in faculty
+                ? faculty.name
+                : findFaculty.name,
+            experience:
+              "experience" in faculty
+                ? faculty.experience
+                : findFaculty.experience,
+            subjects:
+              "subjects" in faculty
+                ? faculty.subjects
+                : findFaculty.subjects,
+            // description:
+            //   "description" in faculty
+            //     ? faculty.description
+            //     : findFaculty.description,
 
-            image: "image" in faculty ? faculty.image : findFaculty.image,
-            facultyDescription:
-              "facultyDescription" in faculty
-                ? faculty.facultyDescription
-                : findFaculty.facultyDescription,
-
-            facultyEmail:
+            email:
               "facultyEmail" in faculty
-                ? faculty.facultyEmail
-                : findFaculty.facultyEmail,
+                ? faculty.email
+                : findFaculty.email,
 
-            facultyMobile:
-              "facultyMobile" in faculty
-                ? faculty.facultyMobile
-                : findFaculty.facultyMobile,
+            mobile:
+              "mobile" in faculty
+                ? faculty.mobile
+                : findFaculty.mobile
 
-            facultyQualification:
-              "facultyQualification" in faculty
-                ? faculty.facultyQualification
-                : findFaculty.facultyQualification,
-            facultyInstitute:
-              "facultyInstitute" in faculty
-                ? faculty.facultyInstitute
-                : findFaculty.facultyInstitute,
-            facultyGender:
-              "facultyGender" in faculty
-                ? faculty.facultyGender
-                : findFaculty.facultyGender
+            // qualification:
+            //   "qualification" in faculty
+            //     ? faculty.qualification
+            //     : findFaculty.qualification
+            // institute:
+            //   "institute" in faculty
+            //     ? faculty.institute
+            //     : findFaculty.institute
+            // gender:
+            //   "gender" in faculty
+            //     ? faculty.gender
+            //     : findFaculty.gender
           }
         }
       );
