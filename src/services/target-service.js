@@ -265,12 +265,13 @@ export default class TargetService {
       const dbc = await mongoConnect();
       let registeredStudentList = await dbc
         .collection("registrations")
+        .find({})
         //.find({ isDeleted: false })
         // .find({
         //   status: registrationQueryFields.status,
         //   type: registrationQueryFields.type
         // })
-        //.sort({ createdAt: -1 })
+        .sort({ createdAt: -1 })
         .toArray();
       return {
         status: true,

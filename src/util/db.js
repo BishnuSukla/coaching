@@ -45,7 +45,8 @@ const mongoConnect = ()=>{
         MongoClient.connect(
             MongoUriBuilder({
                 ...mongoConnectionSettings,
-                database: MONGO_DB_NAME
+                database: MONGO_DB_NAME,
+                useUnifiedTopology: true
             }),
             { useNewUrlParser: true }, // to supress deprecation warning
             { useUnifiedTopology: true },
