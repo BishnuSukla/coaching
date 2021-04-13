@@ -310,28 +310,28 @@ router.delete("/delete-course", isValidateToken(), async (req, res) => {
   }
 });
 
-// router.delete("/delete-registration", isValidateToken(), async (req, res) => {
-//   try {
-//     let { registrationId } = req.body;
-//     let deleteRegistration = await targetService.OnDeleteRegistration(
-//       registrationId
-//     );
-//     if (!deleteRegistration.status) {
-//       throw deleteRegistration.error;
-//     }
-//     res.status(200).json({
-//       success: true,
-//       message: "Notification has been deleted successfully!!",
-//       data: deleteRegistration.message
-//     });
-//   } catch (ex) {
-//     res.status(400).json({
-//       success: false,
-//       message: "Error in deleting registration",
-//       error: ex
-//     });
-//   }
-// });
+router.delete("/delete-registration", isValidateToken(), async (req, res) => {
+  try {
+    let { registrationId } = req.body;
+    let deleteRegistration = await targetService.OnDeleteRegistration(
+      registrationId
+    );
+    if (!deleteRegistration.status) {
+      throw deleteRegistration.error;
+    }
+    res.status(200).json({
+      success: true,
+      message: "Registration has been deleted successfully!!",
+      data: deleteRegistration.message
+    });
+  } catch (ex) {
+    res.status(400).json({
+      success: false,
+      message: "Error in deleting registration",
+      error: ex
+    });
+  }
+});
 
 router.get("/uploaded-image", (req, res) => {
   try {

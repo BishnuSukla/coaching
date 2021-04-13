@@ -326,6 +326,31 @@ export default class TargetService {
       };
     }
   };
+  OnDeleteRegistration = async registrationId => {
+    try {
+      const dbc = await mongoConnect();
+      let findCourse = await dbc.collection("registrations").findOne({ registrationId });
+      if (!findCourse) {
+        throw "Registration not found!!";
+      }
+      let { result } = await dbc.collection("registrations").deleteOne(
+        { registrationId: registrationId }
+      );
+      if (result.ok != 1) {
+        throw "Error in deleteing registration!!";
+      }
+      return {
+        status: true,
+        message: "Registration has been deleted successfully"
+      };
+    } catch (ex) {
+      console.error("Error in deleting registration");
+      return {
+        status: false,
+        error: ex
+      };
+    }
+  };
   // OnRegister = async course => {
   //   try {
   //     const dbc = await mongoConnect();
@@ -465,7 +490,7 @@ export default class TargetService {
         { courseId: courseId }
       );
       if (result.ok != 1) {
-        throw "Error in updating course!!";
+        throw "Error in deleting course!!";
       }
       return {
         status: true,
