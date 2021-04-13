@@ -205,26 +205,30 @@ router.patch("/update-registration", isValidateToken(), async (req, res) => {
     });
   }
 });
+
 router.delete("/delete-registration", isValidateToken(), async (req, res) => {
   try {
-    let { studentId } = req.body;
-    let deleteStudent = await targetService.OnDeleteFaculty(studentId);
-    if (!deleteStudent.status) {
-      throw deleteStudent.error;
+    let { registrationId } = req.body;
+    let deleteRegistration = await targetService.OnDeleteRegistration(
+      registrationId
+    );
+    if (!deleteRegistration.status) {
+      throw deleteRegistration.error;
     }
     res.status(200).json({
       success: true,
-      message: "Student has been deleted successfully!!",
-      data: deleteStudent.message
+      message: "Registration has been deleted successfully!!",
+      data: deleteRegistration.message
     });
   } catch (ex) {
     res.status(400).json({
       success: false,
-      message: "Error in deleting Student",
+      message: "Error in deleting registration",
       error: ex
     });
   }
 });
+
 
 router.get("/get-courses", async (req, res) => {
   try {
@@ -328,28 +332,7 @@ router.delete("/delete-course", isValidateToken(), async (req, res) => {
   }
 });
 
-router.delete("/delete-registration", isValidateToken(), async (req, res) => {
-  try {
-    let { registrationId } = req.body;
-    let deleteRegistration = await targetService.OnDeleteRegistration(
-      registrationId
-    );
-    if (!deleteRegistration.status) {
-      throw deleteRegistration.error;
-    }
-    res.status(200).json({
-      success: true,
-      message: "Registration has been deleted successfully!!",
-      data: deleteRegistration.message
-    });
-  } catch (ex) {
-    res.status(400).json({
-      success: false,
-      message: "Error in deleting registration",
-      error: ex
-    });
-  }
-});
+
 
 router.get("/uploaded-image", (req, res) => {
   try {
