@@ -163,10 +163,8 @@ router.post("/registration", async (req, res) => {
 });
 
 router.get("/get-registrations", isValidateToken(), async (req, res) => {
-  // console.log(req)
   try {
    // let { registrationQueryFields } = req.query;
-
     let fetchStudents = await targetService.OnGetRegisteredStudents();
     if (!fetchStudents.status) {
       throw fetchStudents.error;
@@ -203,6 +201,26 @@ router.patch("/update-registration", isValidateToken(), async (req, res) => {
     res.status(400).json({
       success: false,
       message: "Error in updating Registration",
+      error: ex
+    });
+  }
+});
+router.delete("/delete-registration", isValidateToken(), async (req, res) => {
+  try {
+    let { studentId } = req.body;
+    let deleteStudent = await targetService.OnDeleteFaculty(studentId);
+    if (!deleteStudent.status) {
+      throw deleteStudent.error;
+    }
+    res.status(200).json({
+      success: true,
+      message: "Student has been deleted successfully!!",
+      data: deleteStudent.message
+    });
+  } catch (ex) {
+    res.status(400).json({
+      success: false,
+      message: "Error in deleting Student",
       error: ex
     });
   }
