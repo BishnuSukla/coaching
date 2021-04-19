@@ -164,8 +164,8 @@ router.post("/registration", async (req, res) => {
 
 router.get("/get-registrations", isValidateToken(), async (req, res) => {
   try {
-   // let { registrationQueryFields } = req.query;
-    let fetchStudents = await targetService.OnGetRegisteredStudents();
+    let { status } = req.query;
+    let fetchStudents = await targetService.OnGetRegisteredStudents(status);
     if (!fetchStudents.status) {
       throw fetchStudents.error;
     }

@@ -238,7 +238,7 @@ export default class TargetService {
         .toString(36)
         .substring(7);
       register.createdAt = new Date();
-      register.prevStatus = "";
+      register.status = "";
       let { result } = await dbc
         .collection("registrations")
         .insertOne(register);
@@ -258,19 +258,13 @@ export default class TargetService {
       };
     }
   };
-  OnGetRegisteredStudents = async () => {
-    //console.log("registrationQueryFields", typeof registrationQueryFields);
+  OnGetRegisteredStudents = async (registrationQueryFields) => {
+    console.log("registrationQueryFields",registrationQueryFields);
     try {
-      //registrationQueryFields = JSON.parse(registrationQueryFields);
       const dbc = await mongoConnect();
       let registeredStudentList = await dbc
         .collection("registrations")
-        .find({})
-        //.find({ isDeleted: false })
-        // .find({
-        //   status: registrationQueryFields.status,
-        //   type: registrationQueryFields.type
-        // })
+        .find({status: registrationQueryFields})
         .sort({ createdAt: -1 })
         .toArray();
       return {
@@ -300,14 +294,34 @@ export default class TargetService {
         { registrationId: registration.registrationId },
         {
           $set: {
-            //prevStatus: findRegistration.status,
-            status: registration.undo
-              ? findRegistration.prevStatus
-              : registration.status,
-            prevStatus: registration.undo ? "" : findRegistration.status
-            // "status" in registration
-            //   ? registration.status
-            //   : findRegistration.status
+            name:
+              "name" in registration
+                ? registration.name
+                : findRegistration.name,
+            address:
+              "address" in registration
+                ? registration.faculty
+                : findRegistration.faculty,
+            mobile:
+              "mobile" in registration
+                ? registration.typeOfTution
+                : findRegistration.typeOfTution,
+            email:
+              "email" in registration
+                ? registration.topicCovered
+                : findRegistration.topicCovered,
+            class:
+              "class" in registration
+                ? registration.category
+                : findRegistration.category,
+            subjects:
+                "subjects" in registration
+                  ? registration.class
+                  : findRegistration.class,
+            status:
+                  "status" in registration
+                    ? registration.status
+                    : findRegistration.status,
           }
         }
       );
