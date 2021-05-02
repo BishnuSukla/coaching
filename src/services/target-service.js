@@ -259,7 +259,6 @@ export default class TargetService {
     }
   };
   OnGetRegisteredStudents = async (registrationQueryFields) => {
-    console.log("registrationQueryFields",registrationQueryFields);
     try {
       const dbc = await mongoConnect();
       let registeredStudentList = await dbc

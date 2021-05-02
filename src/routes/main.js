@@ -438,7 +438,6 @@ router.patch("/update-student", isValidateToken(), async (req, res) => {
 router.delete("/delete-notification", isValidateToken(), async (req, res) => {
   try {
     let { notificationId } = req.body;
-    //console.log(notificationId);
     let deleteNotification = await targetService.OnDeleteNotification(
       notificationId
     );
